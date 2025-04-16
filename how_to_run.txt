@@ -1,0 +1,10 @@
+## 🚀 How to Run
+
+### Backend
+1. `cd backend`
+2. `pip install -r requirements.txt`
+3. Add your `game_lore.pdf` in the backend folder
+4. Replace `your-openai-api-key` in `main.py`
+5. Run the server:
+```bash
+uvicorn main:app --reload
