@@ -12,11 +12,11 @@ public class DialogueSystem : MonoBehaviour
     public TMP_Text npcText;
     public TMP_InputField playerInput;
     public Button sendButton;
-    
+
     [Header("API Settings")]
     public string apiEndpoint = "https://project-bloodrain.onrender.com/npc-response";
-    public string playerId = "player_123"; // You can generate this dynamically
-    
+    public string playerId = "player_123";
+
     private void Start()
     {
         dialoguePanel.SetActive(false);
@@ -33,20 +33,20 @@ public class DialogueSystem : MonoBehaviour
     public async void SendPlayerMessage()
     {
         string message = playerInput.text;
-        if(string.IsNullOrWhiteSpace(message)) return;
-        
+        if (string.IsNullOrWhiteSpace(message)) return;
+
         sendButton.interactable = false;
         playerInput.interactable = false;
-        
+
         try
         {
             string jsonPayload = $"{{\"message\":\"{message}\", \"player_id\":\"{playerId}\"}}";
             string npcResponse = await PostToAPI(jsonPayload);
-            
+
             npcText.text = npcResponse;
             playerInput.text = "";
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             npcText.text = "My magic fails me... try again later.";
             Debug.LogError($"API Error: {e.Message}");
@@ -61,23 +61,23 @@ public class DialogueSystem : MonoBehaviour
 
     private async Task<string> PostToAPI(string jsonPayload)
     {
-        using(UnityWebRequest webRequest = new UnityWebRequest(apiEndpoint, "POST"))
+        using (UnityWebRequest webRequest = new UnityWebRequest(apiEndpoint, "POST"))
         {
             byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(jsonPayload);
             webRequest.uploadHandler = new UploadHandlerRaw(jsonToSend);
             webRequest.downloadHandler = new DownloadHandlerBuffer();
             webRequest.SetRequestHeader("Content-Type", "application/json");
-            
+
             var operation = webRequest.SendWebRequest();
-            
-            while(!operation.isDone)
+
+            while (!operation.isDone)
                 await Task.Yield();
-            
-            if(webRequest.result != UnityWebRequest.Result.Success)
+
+            if (webRequest.result != UnityWebRequest.Result.Success)
             {
                 throw new Exception(webRequest.error);
             }
-            
+
             return JsonUtility.FromJson<APIResponse>(webRequest.downloadHandler.text).reply;
         }
     }
