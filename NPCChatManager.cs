@@ -7,7 +7,7 @@ public class NPCChatManager : MonoBehaviour
 {
     public InputField playerInputField;
     public Text npcResponseText;
-    private string apiURL = "https://your-ngrok-url.ngrok.io/npc-response";  // Replace with your real endpoint
+    private string apiURL = "https://project-bloodrain.onrender.com/npc-response"; // Replace with your deployed endpoint
 
     [System.Serializable]
     class PlayerInput
@@ -51,7 +51,7 @@ public class NPCChatManager : MonoBehaviour
         }
         else
         {
-            npcResponseText.text = "Error communicating with Serath.";
+            npcResponseText.text = "Serath is silent. Connection failed.";
         }
     }
 }
