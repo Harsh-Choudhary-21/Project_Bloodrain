@@ -3,3 +3,5 @@ uvicorn
 openai
 python-multipart
 PyMuPDF
+python-dotenv
+requests
