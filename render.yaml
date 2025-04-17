@@ -1,1 +1,11 @@
+services:
+  - type: web
+    name: ai-npc-backend
+    env: python
+    buildCommand: ""
+    startCommand: uvicorn main:app --host 0.0.0.0 --port 10000
+    plan: free
+    region: oregon  # Or change to your preferred region
+    branch: main
+    autoDeploy: true
 
