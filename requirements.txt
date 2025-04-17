@@ -5,3 +5,5 @@ python-multipart
 PyMuPDF
 python-dotenv
 requests
+scikit-learn
+pickle5
