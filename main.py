@@ -8,7 +8,7 @@ import os
 app = FastAPI()
 
 # === CONFIGURATION ===
-DEEPSEEK_API_KEY = "sk-1e1153cb15784fa9868ed59d6046251d"  # Replace with your real key
+DEEPSEEK_API_KEY = "Nice try diddy"  # Replace with your real key
 DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions"
 MEMORY_FILE = "memory/player_memory.json"
 LORE_FILE = "static/game_lore.pdf"  # Ensure the file is located in the static directory
